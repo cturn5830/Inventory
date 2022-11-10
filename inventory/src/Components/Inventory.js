@@ -4,12 +4,14 @@ import ProductDisplay from "./ProductDisplay";
 import { useEffect, useState } from "react";
 import {inventory} from '../Firebase/db';
 import { getDocs } from "firebase/firestore";
-let AddCheck = 'false';
+
 export default function Inventory() {
     
     const [products, setProducts] = useState([]);
-    const [loading, setLoading ] =useState (true);
+    const [loading, setLoading ] = useState(true);
   
+    const [wrapper, setWrapper ] = useState('200vh');
+    const [addBTN, setAddBTN ] = useState('0');
   useEffect( ()=>{
 
     async function getData() {
@@ -49,7 +51,6 @@ export default function Inventory() {
         <p>SGA</p>
         <p>Retail</p>
         <p>Year</p>
-        <p>Id</p>
         <p>EDIT</p>
       </div>
         {products && products.map(prod => <ProductDisplay key={prod.id} product={prod} />)}
@@ -59,30 +60,26 @@ export default function Inventory() {
   
         { <div className="addremoveWrapper">
           <button onClick={()=>{
-            const AddWrapper = document.getElementById('ProductEntriesWrapper');
-            const removeBTN = document.getElementById('removeBTN');
-            
-            if(AddCheck==='true'){
-              AddCheck='false';
-              AddWrapper.style.top='500vh'
-              removeBTN.style.top='0'
-              console.log('Add check is set to '+AddCheck)
-            }
-            else{
-              AddCheck='true';
-              AddWrapper.style.top='0'
-              removeBTN.style.top='500px'
-
-              console.log('Add check is set to '+AddCheck)
-            }
-            
-          }} className="addBTN ADDremove"><img src={btnIMG} alt='Add'/></button>
-          <button className="removeBTN ADDremove" id='removeBTN'><img src={btnIMG} alt='X'/></button>
+              setWrapper('0')
+              setAddBTN('150px')
+          }} style={{top:addBTN}} className="addBTN ADDremove">
+            <img src={btnIMG} alt='Add' />
+            </button>
         </div>
          }
-      <AddInventory/>
-         
+      <AddInventory movement={wrapper} cancelBTN={cancelBTN()}
+      />
       </main>
     </>)
+    function cancelBTN(){
+      return(<>
+      <button onClick={()=>{setWrapper('200vh')
+      setAddBTN('0')}}>
+        Cancle
+      </button>
+      
+      </>)
+    }
   }
   
+

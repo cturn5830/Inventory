@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { inventory, db } from "../Firebase/db";
+import {db } from "../Firebase/db";
 import {updateDoc, doc } from "firebase/firestore";
 import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
@@ -38,6 +38,7 @@ export default function EditProduct(props){
         e.preventDefault();
         
     }
+
     return(<>
     <form className="ProductEntries" onSubmit={SendInventory}>
         <h1>Edit Product</h1>
@@ -69,7 +70,3 @@ export default function EditProduct(props){
            
 </>)
 }
-
-/*
-
-*/

@@ -4,8 +4,10 @@ import 'firebase/compat/firestore';
 import { addDoc } from "firebase/firestore";
 import { inventory } from "../Firebase/db";
 
-export default function AddInventory() {
+export default function AddInventory(props) {
     // ... omitted
+    const movement = props.movement;
+    const cancelBTN = props.cancelBTN;
 
     const [formValue1, setFormValue1] = useState('');
     const [formValue2, setFormValue2] = useState('');
@@ -46,7 +48,7 @@ export default function AddInventory() {
    
   
     return (<>
-  <div id='ProductEntriesWrapper'>
+  <div id='ProductEntriesWrapper' style={{top:movement}}>
       <form className="ProductEntries" onSubmit={SendInventory}>
         <h3>Product</h3>
         <input value={formValue1} onChange={(e) => setFormValue1(e.target.value)} placeholder="Product" />
@@ -69,7 +71,7 @@ export default function AddInventory() {
   <br/>
         <button type="submit" disabled={!formValue1 && !formValue2 && !formValue3 && !formValue4 && !formValue5 && !formValue6 && !formValue7 && !formValue8 && !formValue9} onClick={
           ()=>{addDoc(inventory, newProduct)}}>Submit</button>
-  
+        {cancelBTN}
       </form>
   </div>
     </>)

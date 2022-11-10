@@ -24,12 +24,10 @@ export default function ProductDisplay(props) {
           if(EditCheck === 'false'){
             EditCheck = 'true';
             setdisplayState('0');
-            console.log('EditCheck='+EditCheck);
           }
           else{
             EditCheck = 'false';
             setdisplayState('500vh');
-            console.log('EditCheck='+EditCheck);
           }
         }}>EDIT</button>
       </div>
@@ -39,7 +37,7 @@ export default function ProductDisplay(props) {
       
       productValue={{Product, Brand, Amount, Size, Location, Campaign, SGA, Retail, Year, createdAt}}
       />
-        <button className="editdocBTN" onClick={
+        <button className="editdocBTN EditCloseBTN" onClick={
           ()=>{
             setdisplayState('500vh');}
         }>
